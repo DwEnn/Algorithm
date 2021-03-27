@@ -1,59 +1,147 @@
 package basic
 
+import java.util.*
+
 fun main() {
 
-    var dfs = DFS(8)
+//    var dfs = DFS(8)
+//    dfs.run {
+//        put(1, 2)
+//        put(1, 3)
+//        put(2, 4)
+//        put(2, 5)
+//        put(3, 6)
+//        put(3, 7)
+//        put(4, 8)
+//        put(5, 8)
+//        put(6, 8)
+//        put(7, 8)
+//
+//        printGraphToAdjArr()
+//        println()
+//
+//    }
+//    // 정점 1-8 부터 탐색
+//    for (i in 1..8) {
+//        println("정점 $i 부터 탐색")
+//        dfs.dfs(i)
+//        dfs.clearVisitArr()
+//        println()
+//    }
+//
+//    println()
+//    dfs = DFS(10)
+//    dfs.run {
+//        put(0, 1)
+//        put(1, 3)
+//        put(2, 3)
+//        put(4, 6)
+//        put(5, 7)
+//        put(5, 8)
+//        put(7, 8)
+//
+//        printGraphToAdjArr()
+//        println()
+//        dfsAll()
+//        println()
+//    }
+//
+//    // 정점 0-8 부터 탐색
+//    for (i in 0..8) {
+//        println("정점 $i 부터 탐색")
+//        dfs.dfs(i)
+//        dfs.clearVisitArr()
+//        println()
+//    }
 
-    dfs.run {
-        put(1, 2)
-        put(1, 3)
-        put(2, 4)
-        put(2, 5)
-        put(3, 6)
-        put(3, 7)
-        put(4, 8)
-        put(5, 8)
-        put(6, 8)
-        put(7, 8)
-
-        printGraphToAdjArr()
-        println()
-
+    val dfs1 = DFS1(4).apply {
+        addEdge(0, 1)
+        addEdge(0, 2)
+        addEdge(1, 2)
+        addEdge(2, 0)
+        addEdge(2, 3)
+        addEdge(3, 3)
     }
-    // 정점 1-8 부터 탐색
-    for (i in 1..8) {
-        println("정점 $i 부터 탐색")
-        dfs.dfs(i)
-        dfs.clearVisitArr()
-        println()
-    }
 
-    println()
-    dfs = DFS(10)
-    dfs.run {
-        put(0, 1)
-        put(1, 3)
-        put(2, 3)
-        put(4, 6)
-        put(5, 7)
-        put(5, 8)
-        put(7, 8)
+    dfs1.DFS(2)
+    dfs1.DFS()
 
-        printGraphToAdjArr()
-        println()
-        dfsAll()
-        println()
-    }
-
-    // 정점 0-8 부터 탐색
-    for (i in 0..8) {
-        println("정점 $i 부터 탐색")
-        dfs.dfs(i)
-        dfs.clearVisitArr()
-        println()
-    }
 }
 
+/**
+ * 인접 리스트 이용
+ */
+private class DFS1 private constructor() {
+    // 노드의 개수
+    private var V = 0
+
+    // 인접 리스트
+    private lateinit var adj: LinkedList<LinkedList<Int>>
+
+    constructor(v: Int) : this() {
+        V = v
+        adj = LinkedList()
+        // 인접 리스트 초기화
+        for (i in 0 until V)
+            adj.add(LinkedList())
+    }
+
+    /**
+     * 노드를 연결
+     */
+    fun addEdge(v: Int, w: Int) {
+        adj[v].add(w)
+    }
+
+    /**
+     * DFS 에 의해 사용되는 함수
+     */
+    fun DFSUtil(v: Int, visited: BooleanArray) {
+        // 현재 노드를 방문한 것으로 표시하고 출력
+        visited[v] = true
+        print("$v ")
+
+        // 방문한 노드와 인접한 모든 노드를 가져온다
+        val it = adj[v].listIterator()
+        while (it.hasNext()) {
+            val n = it.next()
+            // 방문하지 않은 노드라면 해당 노드를 시작 노드로 다시 DFSUtil 을 호출
+            if (!visited[n])
+                DFSUtil(n, visited)
+        }
+    }
+
+    /**
+     * 주어진 노드를 시작노드로 DFS 탐색
+     */
+    fun DFS(v: Int) {
+        // 노드의 방문 여부 판단 ( 초기값 : false )
+        val visited = BooleanArray(V)
+        DFSUtil(v, visited)
+        println()
+    }
+
+    /**
+     * DFS 탐색
+     */
+    fun DFS() {
+        // 노드의 방문 여부 판단 ( 초기값 : false )
+        val visited = BooleanArray(V)
+        // 비연결형 그래프의 경우, 모든 정점을 하나씩 방문
+        for (i in 0 until V) {
+            if (!visited[i]) {
+                DFSUtil(i, visited)
+                println()
+            }
+        }
+    }
+
+}
+
+
+/**
+ * 인접 행렬 이용
+ */
 private class DFS {
 
     // 정점의 갯수
