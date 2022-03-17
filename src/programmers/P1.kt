@@ -47,9 +47,11 @@ fun main() {
 private fun solution(numbers: IntArray): String {
     var answer = ""
 
-    numbers.sortedWith { o1, o2 ->
-        "$o2$o1".compareTo("$o1$o2")
-    }.forEach { answer += it }
+    numbers.sortedWith(
+        Comparator { o1, o2 ->
+            "$o2$o1".compareTo("$o1$o2")
+        }
+    ).forEach { answer += it }
     if ("(0*)".toRegex().replace(answer, "").isEmpty())
         answer = "0"
 
