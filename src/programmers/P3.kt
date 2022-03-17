@@ -1,6 +1,6 @@
 package programmers
 
-import java.util.*
+import java.util.LinkedList
 import kotlin.collections.HashMap
 
 /**
@@ -15,7 +15,7 @@ fun main() {
 //    val course = intArrayOf(2,3,5)
 
     val orders = arrayOf("XYZ", "XWY", "WXA")
-    val course = intArrayOf(2,3,4)
+    val course = intArrayOf(2, 3, 4)
 
     solution(orders, course).forEach {
         println(it)
@@ -41,17 +41,18 @@ private fun solution(orders: Array<String>, course: IntArray): Array<String> {
 private fun decideCourse(courseMap: HashMap<String, Int>): LinkedList<String> {
 
     val entries = LinkedList(courseMap.entries)
-    entries.sortWith(kotlin.Comparator { o1, o2 ->
-        o2.value.compareTo(o1.value)
-    })
+    entries.sortWith(
+        Comparator { o1, o2 ->
+            o2.value.compareTo(o1.value)
+        }
+    )
 
     val course = LinkedList<String>()
     var max = 0
     entries.forEach {
         when {
             max == 0 -> {
-                if (it.value < 2)
-                    return@forEach
+                if (it.value < 2) return@forEach
 
                 course.add(it.key)
                 max = it.value
@@ -68,8 +69,7 @@ private fun decideCourse(courseMap: HashMap<String, Int>): LinkedList<String> {
 
 private fun findCourse(orders: Array<String>, idx: Int, course: String) {
     val course = String(course.toCharArray().sorted().toCharArray())
-    if (courseMap[course] != null)
-        return
+    if (courseMap[course] != null) return
 
     var cnt = 1
     for (i in orders.indices) {
@@ -83,8 +83,7 @@ private fun findCourse(orders: Array<String>, idx: Int, course: String) {
                 break
             }
         }
-        if (itHasCourse)
-            cnt++
+        if (itHasCourse) cnt++
     }
     courseMap[course] = cnt
 }
