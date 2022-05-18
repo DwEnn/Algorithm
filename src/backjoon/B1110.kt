@@ -8,8 +8,8 @@ fun main() {
 
 private var cnt = 0
 
-fun calc(input: Int, num: Int) {
-    val n = if(num < 10)
+private fun calc(input: Int, num: Int) {
+    val n = if (num < 10)
         "0$num"
     else
         num.toString()
