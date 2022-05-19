@@ -1,27 +1,5 @@
 package basic
 
-private interface IList<T> {
-    fun add(t: T)
-
-    fun insert(index: Int, t: T)
-
-    fun clear()
-
-    fun delete(t: T): Boolean
-
-    fun deleteByIndex(index: Int): Boolean
-
-    fun get(index: Int): T
-
-    fun indexOf(t: T): Int
-
-    fun isEmpty(): Boolean
-
-    fun contains(t: T): Boolean
-
-    fun size(): Int
-}
-
 class MyArrayList<T : Any> : IList<T> {
 
     companion object {
@@ -42,7 +20,7 @@ class MyArrayList<T : Any> : IList<T> {
             elements[i + 1] = elements[i]
         }
         elements[index] = t
-        size ++
+        size++
     }
 
     /**
@@ -63,7 +41,7 @@ class MyArrayList<T : Any> : IList<T> {
         for (i in 0 until size) {
             if (elements[i] == t) {
                 moveElementsToLeftByIndex(i)
-                size --
+                size--
                 return true
             }
         }
@@ -75,7 +53,7 @@ class MyArrayList<T : Any> : IList<T> {
         if (index < 0 || index > size - 1)
             return false
         moveElementsToLeftByIndex(index)
-        size --
+        size--
         return true
     }
 
