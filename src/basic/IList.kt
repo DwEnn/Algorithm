@@ -11,7 +11,7 @@ interface IList<T> {
 
     fun deleteByIndex(index: Int): Boolean
 
-    fun get(index: Int): T
+    operator fun get(index: Int): T
 
     fun indexOf(t: T): Int
 
