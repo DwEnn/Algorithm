@@ -138,7 +138,7 @@ class GraphAlgorithms {
 
         while (pq.isNotEmpty()) {
             val top = pq.poll()
-            val vertex = top.second
+            val vertex = top.first
             val distance = top.second
 
             if (dist[vertex] < distance) continue
