@@ -26,7 +26,7 @@ private fun Point.isReachedGoal(x: Int, y: Int): Boolean {
     return this.x == x && this.y == y
 }
 
-fun search(): Int {
+private fun search(): Int {
     val visited = Array(board.size) { BooleanArray(board[0].size) }
     val queue = LinkedList<Point>()
 
