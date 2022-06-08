@@ -18,7 +18,6 @@ fun main() {
                 }
             }
             println(cnt)
-
         }
     }
 }
@@ -55,8 +54,7 @@ private fun inRange(cabbage1: Cabbage, cabbage2: Cabbage): Boolean {
 
 private class Cabbage(val x: Int, val y: Int, var visit: Boolean = false)
 
-
-//fun main() {
+// fun main() {
 //    BufferedReader(InputStreamReader(System.`in`)).use { br ->
 //        val T = br.readLine().toInt()
 //        val sb = StringBuilder()
@@ -78,9 +76,9 @@ private class Cabbage(val x: Int, val y: Int, var visit: Boolean = false)
 //
 //        println(sb.toString())
 //    }
-//}
+// }
 //
-//private class Graph private constructor(){
+// private class Graph private constructor(){
 //
 //    lateinit var graph: Array<IntArray>
 //    lateinit var visited: BooleanArray
@@ -116,4 +114,4 @@ private class Cabbage(val x: Int, val y: Int, var visit: Boolean = false)
 //        return count
 //    }
 //
-//}
+// }
