@@ -5,11 +5,11 @@ import java.io.InputStreamReader
 import java.util.*
 
 fun main() {
-    BufferedReader(InputStreamReader(System.`in`)).use { br->
+    BufferedReader(InputStreamReader(System.`in`)).use { br ->
         val list = LinkedList<Int>()
         // N 배열 초기화
         repeat(br.readLine().toInt()) {
-            list.add(it+1)
+            list.add(it + 1)
         }
 
         while (list.size != 1) {
